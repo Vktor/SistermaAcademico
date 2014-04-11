@@ -6,33 +6,46 @@ class PersistenciaDatos {
 	private $_resultado;
 	private $_query;
 	
-	public function __construct($sql){
+	public function __construct($sql,$query){
 		$this->_sql = $sql;
+		$this->_query = $query;
 	}
 	
-	public function consulta($sql, $consulta = ''){
-		$conexion = new Conexion;
-		$this->_query = mysqli_query($conexion->getConexion(),$sql);
+	public function consulta($sql, $consulta, $con){
+		$this->_query = mysqli_query($con,$sql);
 		
 		if(!$this->_query) {
 			throw new Exception("Error al realizar la consulta $consulta");
-		} else { 
-			return $this->_query;
-		}
+		} 
+		return $this->_query;
 	}
 	
 	public function cuentaSQL($resultado){
 		return mysqli_num_rows($resultado);
 	}
 	
+	public function valores($resultado) {
+		return mysqli_fetch_array($resultado);
+	}
+	
 }
 
+/*
+require_once 'Errores.php';
 $persistencia = new PersistenciaDatos;
+$conexion = new Conexion;
+$con = $conexion->conectar();
+
 try {
-	$var = $persistencia->consulta('select * from errores','consultar tablar errores');
-	echo $persistencia->cuentaSQL($var);
+	$var = $persistencia->consulta('select * from errores','consultar tablar errores',$con);
+
+	while($row = $persistencia->valores($var)){
+		$id = $row['id_error'];
+		$dato = $row['datos_error'];
+		echo $id.' - '.$dato.'<br>';
+	}
+	
 } catch(Exception $ex){
-	require_once 'Errores.php';
 	$error = new Error();
 	$mensaje = $ex->getMessage();
 	$codigo = $ex->getCode();
@@ -43,3 +56,4 @@ try {
 //	$log = $error->guardarLogError($codigo,$mensaje,$fichero,$linea,$fecha);
 	echo $error->errores($codigo,$mensaje,$linea,$fichero,$clase);
 }
+*/

@@ -15,7 +15,8 @@ class Conexion {
 		$this->_con = mysqli_connect($this->_server,$this->_usuario,$this->_password,$this->_base);
 		if(!$this->_con) {
 			throw new Exception('No se puede conectar con la base de datos');
-		} else return $this->_con;
+		}
+		return $this->_con;
 	}
 	
 	public function getConexion() {
@@ -34,7 +35,7 @@ class Conexion {
 }
 
 //Para hacer la prueba descomentar las líenas de abajo
-
+/*
 require_once('Errores.php');
 try {
 	$conexion = new Conexion;
@@ -48,5 +49,6 @@ try {
 	$clase = 'error-grave';
 	$fecha = date('d/m/Y h:i:s A');
 //	$log = $error->guardarLogError($codigo,$mensaje,$fichero,$linea,$fecha);
-	echo $error->errores($codigo,$mensaje,$linea,$clase);
+	echo $error->errores($codigo,$mensaje,$clase);
 }
+*/

@@ -4,7 +4,6 @@
     <script type="text/javascript" src="./ckfinder/ckfinder.js"></script>
 </head>
 <body>
-	<h1>Saludos desde mi computadora xD F.Victor</h1>
     <h1>CKEditor CKFinder Integration using PHP</h1>
     <p>
     <textarea id="editor1" name="editor1" rows="10" cols="80"></textarea>
